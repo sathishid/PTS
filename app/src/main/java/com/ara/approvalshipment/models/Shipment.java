@@ -36,6 +36,24 @@ public class Shipment {
     private String clottedReason;
     private double goodQty;
     private String arrivedDate;
+    private double companyDiversionQty;
+    private double ownDiversionQty;
+
+    public double getCompanyDiversionQty() {
+        return companyDiversionQty;
+    }
+
+    public void setCompanyDiversionQty(double companyDiversionQty) {
+        this.companyDiversionQty = companyDiversionQty;
+    }
+
+    public double getOwnDiversionQty() {
+        return ownDiversionQty;
+    }
+
+    public void setOwnDiversionQty(double ownDiversionQty) {
+        this.ownDiversionQty = ownDiversionQty;
+    }
 
     public String getArrivedDate() {
         return arrivedDate;

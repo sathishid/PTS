@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
         if (sharedPreferences.contains(USER_INFO)) {
             CurrentUser = User.fromGson(sharedPreferences.getString(USER_INFO, null));
             loadShipments();
+            updateLabel();
 
         } else {
             Intent intent = new Intent(this, LoginActivity.class);
@@ -76,6 +80,13 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
         }
 
 
+    }
+
+    private void updateLabel() {
+        ActionBar actionBar = getSupportActionBar();
+        String title = actionBar.getTitle().toString();
+        title += " - " + CurrentUser.getUserName();
+        setTitle(title);
     }
 
     private void loadShipments() {
@@ -110,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
             case LOGIN_REQUEST:
                 loadShipments();
                 updateSharedPreference();
+                updateLabel();
                 break;
             case ARRIVAL_REQUEST:
                 int position = data.getIntExtra(POSITION_EXTRA, -1);

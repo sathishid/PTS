@@ -30,7 +30,7 @@
             android:label="@string/arrival_validation" />
         <activity
             android:name=".DatePickerActivity"
-            android:label="Pick a Date"></activity>
+            android:label="Pick a Date" />
     </application>
 
 </manifest>

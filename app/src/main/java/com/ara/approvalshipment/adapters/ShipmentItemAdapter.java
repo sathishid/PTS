@@ -35,7 +35,7 @@ public class ShipmentItemAdapter extends RecyclerView.Adapter<ShipmentItemAdapte
 
         final Shipment shipment = mValues.get(position);
         holder.mItem = shipment;
-        holder.mProductName.setText(shipment.getProductName());
+        holder.mProductName.setText(shipment.getGradeName());
         holder.mDispatchNo.setText(shipment.getDcNo());
         holder.mTruckNo.setText(shipment.getTruckNo());
         holder.mDate.setText(shipment.getDate());

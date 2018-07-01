@@ -12,6 +12,7 @@
     <style name="InfoView" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:background">@color/lightGray</item>
         <item name="android:layout_marginTop">@dimen/list_item_padding</item>
+        <item name="android:padding">@dimen/list_item_padding</item>
 
     </style>
 

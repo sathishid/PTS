@@ -4,10 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -37,6 +39,7 @@ import static com.ara.approvalshipment.utils.Helper.dateToString;
 import static com.ara.approvalshipment.utils.Helper.formatDouble;
 import static com.ara.approvalshipment.utils.Helper.getSubmitShipmentURL;
 import static com.ara.approvalshipment.utils.Helper.log;
+import static com.ara.approvalshipment.utils.Helper.showSnackbar;
 import static com.ara.approvalshipment.utils.Helper.toDouble;
 
 public class ShipmentArrivalActivity extends AppCompatActivity {
@@ -86,6 +89,12 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
     @BindView(R.id.arr_date)
     TextView mArrivalDateView;
 
+    @BindView(R.id.arr_div_com_qty)
+    TextInputEditText mComDiversionQty;
+
+    @BindView(R.id.arr_div_own_qty)
+    TextInputEditText mOwnDiversionQty;
+
 
     Shipment shipment;
     int position;
@@ -93,7 +102,7 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shipment_arival);
+        setContentView(R.layout.activity_shipment_arrival);
         ButterKnife.bind(this);
 
         Intent data = getIntent();
@@ -115,9 +124,18 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
         String todayDate = dateToString(Calendar.getInstance());
         mArrivalDateView.setText(todayDate);
         shipment.setArrivedDate(todayDate);
+        updateLabel();
     }
 
-    @OnFocusChange({R.id.arr_edit_damaged_qty, R.id.arr_edit_clotted_qty})
+    private void updateLabel() {
+        ActionBar actionBar = getSupportActionBar();
+        String title = actionBar.getTitle().toString();
+        title += " - " + CurrentUser.getUserName();
+        setTitle(title);
+    }
+
+    @OnFocusChange({R.id.arr_edit_damaged_qty, R.id.arr_edit_clotted_qty,
+            R.id.arr_div_com_qty, R.id.arr_div_own_qty})
     public void updateGoodQty(View view, boolean hasFocus) {
         if (hasFocus)
             return;
@@ -128,15 +146,27 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
 
         String clottedQty = mClottedQtyView.getText().toString();
         String damagedQty = mDamagedQtyView.getText().toString();
+        String companyQty = mComDiversionQty.getText().toString();
+        String ownQty = mOwnDiversionQty.getText().toString();
+
         shipment.setClottedQty(toDouble(clottedQty));
         shipment.setDamagedQty(toDouble(damagedQty));
-        double totalDamaged = shipment.getClottedQty() + shipment.getDamagedQty();
+        shipment.setOwnDiversionQty(toDouble(ownQty));
+        shipment.setCompanyDiversionQty(toDouble(companyQty));
+
+        double totalDamaged = shipment.getClottedQty() + shipment.getDamagedQty() +
+                shipment.getOwnDiversionQty() + shipment.getCompanyDiversionQty();
         double goodQty = shipment.getQuantity() - totalDamaged;
         shipment.setGoodQty(goodQty);
         mGoodQty.setText(formatDouble(shipment.getGoodQty()));
 
+        if (goodQty <= 0) {
+            mGoodQty.setTextColor(Color.RED);
+        }
+
 
     }
+
 
     @OnClick(R.id.arrival_submit_btn)
     public void onSubmit(View view) {
@@ -150,6 +180,9 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
         String clottedReason = mClottedReasonView.getText().toString();
         String damagedQty = mDamagedQtyView.getText().toString();
         String damagedReason = mDamagedReasonView.getText().toString();
+        String companyQty = mComDiversionQty.getText().toString();
+        String ownQty = mOwnDiversionQty.getText().toString();
+
 
         double dblClottedQty = toDouble(clottedQty);
         double dblDamagedQty = toDouble(damagedQty);
@@ -157,8 +190,10 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
         shipment.setDamagedQty(dblDamagedQty);
         shipment.setDamagedReason(damagedReason);
         shipment.setClottedReason(clottedReason);
+        shipment.setOwnDiversionQty(toDouble(ownQty));
+        shipment.setCompanyDiversionQty(toDouble(companyQty));
 
-        new SubmitShipment().execute("test");
+        new SubmitShipment().execute();
     }
 
     @OnClick(R.id.arr_date)
@@ -183,6 +218,11 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
             mDamagedReasonView.setError(error);
             return false;
         }
+        if (shipment.getGoodQty() < 0) {
+            showSnackbar(mDateView, R.string.good_qty_neg);
+            return false;
+        }
+
         return true;
 
     }
@@ -248,14 +288,14 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
         finish();
     }
 
-    class SubmitShipment extends AsyncTask<String, Void, String> {
+    class SubmitShipment extends AsyncTask<Void, Void, String> {
         @Override
         protected void onPreExecute() {
             showProgress(true);
         }
 
         @Override
-        protected String doInBackground(String... strings) {
+        protected String doInBackground(Void... strings) {
             OkHttpClient client = new OkHttpClient();
             try {
 

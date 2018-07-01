@@ -23,7 +23,7 @@
     <string name="dispatch_no">Dispatch No</string>
     <string name="something_went_wrong">Some thing went wrong, contact support.</string>
     <string name="login_failed">user name or password mismatch.</string>
-    <string name="dispatched_items">List of Dispatched Items</string>
+    <string name="dispatched_items">Dispatched Items</string>
     <string name="arrival_validation">Arrival Validation</string>
     <string name="sample_customer_name">SREE JAYAJOTHI CEMENTS PRIVATE LTD, ERODE</string>
     <string name="customer_name">Customer Name</string>
@@ -46,11 +46,15 @@
     <string name="damaged_reason">Damaged Reason</string>
     <string name="clotted_reason">Clotted Reason</string>
     <string name="arrived">Arrived</string>
-    <string name="good_quantity">Good Quantity</string>
+    <string name="good_quantity">Final Good Quantity</string>
     <string name="clotted_reason_error">Clotted Reason can\'t be empty.</string>
     <string name="damaged_reason_error">Damaged Reason can\'t be empty.</string>
     <string name="internet_not_available">Check you internet connection.</string>
     <string name="search_truck">Search Truck</string>
     <string name="shipment_submitted">Shipment Submitted Successfully</string>
     <string name="arrived_date">Arrived Date (Tap to Edit)</string>
+    <string name="diversion_details">Diversion Details</string>
+    <string name="company">Company Diversion Quantity</string>
+    <string name="own">Own Diversion Quantity</string>
+    <string name="good_qty_neg">Good quantity cannot be negative.</string>
 </resources>
