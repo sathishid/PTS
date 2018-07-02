@@ -24,17 +24,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 import static com.ara.approvalshipment.utils.Helper.CurrentUser;
+import static com.ara.approvalshipment.utils.Helper.DATA_PARAM;
 import static com.ara.approvalshipment.utils.Helper.DATE_EXTRA;
 import static com.ara.approvalshipment.utils.Helper.DATE_PICKER_REQUEST;
-import static com.ara.approvalshipment.utils.Helper.JSON_MEDIA_TYPE;
+import static com.ara.approvalshipment.utils.Helper.FAILED;
 import static com.ara.approvalshipment.utils.Helper.POSITION_EXTRA;
 import static com.ara.approvalshipment.utils.Helper.SHIPMENT_EXTRA;
+import static com.ara.approvalshipment.utils.Helper.SUCCESS;
 import static com.ara.approvalshipment.utils.Helper.dateToString;
 import static com.ara.approvalshipment.utils.Helper.formatDouble;
 import static com.ara.approvalshipment.utils.Helper.getSubmitShipmentURL;
@@ -192,6 +194,7 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
         shipment.setClottedReason(clottedReason);
         shipment.setOwnDiversionQty(toDouble(ownQty));
         shipment.setCompanyDiversionQty(toDouble(companyQty));
+        shipment.setUser(CurrentUser);
 
         new SubmitShipment().execute();
     }
@@ -298,11 +301,12 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
         protected String doInBackground(Void... strings) {
             OkHttpClient client = new OkHttpClient();
             try {
+                FormBody.Builder builder = new FormBody.Builder();
+                builder.add(DATA_PARAM, shipment.toJson());
 
-                RequestBody requestBody = RequestBody.create(JSON_MEDIA_TYPE, shipment.toJson());
                 Request request = new Request.Builder()
                         .url(getSubmitShipmentURL())
-                        .post(requestBody)
+                        .post(builder.build())
                         .build();
                 okhttp3.Response response = client.newCall(request).execute();
                 ResponseBody responseBody = response.body();
@@ -311,15 +315,19 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
             } catch (Exception e) {
 
                 log("Http URL", e.toString());
+                return FAILED;
 
             }
-            return "Success";
+            return SUCCESS;
         }
 
         @Override
         protected void onPostExecute(String result) {
             showProgress(false);
-            onSubmitComplete();
+            if (result.equalsIgnoreCase(SUCCESS))
+                onSubmitComplete();
+            else
+                showSnackbar(linearLayoutView, R.string.something_went_wrong);
         }
     }
 }

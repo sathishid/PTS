@@ -60,4 +60,10 @@
     <string name="search_grade_name">Search Grade Name</string>
     <string name="search_hint">Type grade name…</string>
     <string name="toolbar_title">Grades</string>
+    <string name="list_of_grades">List of Grades</string>
+    <string name="sales_date">Sales Date (Tap to Edit)</string>
+    <string name="total_items">Total Items</string>
+    <string name="submit_sales">Confirm</string>
+    <string name="list_of_items">List of Items</string>
+    <string name="selling_quantity">Selling Quantity</string>
 </resources>

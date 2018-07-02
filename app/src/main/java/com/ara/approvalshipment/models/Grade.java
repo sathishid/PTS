@@ -1,15 +1,32 @@
 package com.ara.approvalshipment.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Grade {
+    @SerializedName("oa_goods_id")
     private int gradeId;
+    @SerializedName("oa_goods_code")
+    private String gradeCode;
+    @SerializedName("oa_goods_name")
     private String gradeName;
+    @SerializedName("available_qty")
     private double quantity;
+    private double soldQuantity;
 
+    public String getGradeCode() {
+        return gradeCode;
+    }
 
-    public Grade(int gradeId, String gradeName, double quantity) {
-        this.gradeId = gradeId;
-        this.gradeName = gradeName;
-        this.quantity = quantity;
+    public void setGradeCode(String gradeCode) {
+        this.gradeCode = gradeCode;
+    }
+
+    public double getSoldQuantity() {
+        return soldQuantity;
+    }
+
+    public void setSoldQuantity(double soldQuantity) {
+        this.soldQuantity = soldQuantity;
     }
 
     public int getGradeId() {

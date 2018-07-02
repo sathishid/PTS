@@ -2,62 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/list_item_padding"
     android:background="@drawable/list_item_background"
     android:clickable="true"
     android:elevation="6dp"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:padding="@dimen/list_item_padding">
 
     <LinearLayout
-
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/grade_name"
-
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="@string/grade_name"
-
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/list_grade_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-
+            android:layout_marginTop="@dimen/list_item_margin"
             android:text="@string/sample_grade_name" />
 
         <TextView
             android:id="@+id/list_grade_avail_qty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_weight="2"
-
-            android:gravity="right"
+            android:layout_below="@id/list_grade_name"
+            android:layout_marginTop="@dimen/list_item_margin"
             android:text="@string/sample_qty" />
+
     </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/list_grade_sold_qty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/quantity"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
 
 </LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_background"
+    android:elevation="@dimen/item_elevation">
+
+
+    <LinearLayout
+        style="@style/InfoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/grade_name"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/sales_item_grade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sample_grade_name" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/InfoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/selling_quantity"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/sales_item_qty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sample_qty" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_padding"
+    tools:context=".CheckoutActivity">
+
+    <ProgressBar
+        android:id="@+id/checkout_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/checkout_container_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/checkout_layout_date"
+            style="@style/InfoView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sales_date"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/checkout_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawableRight="@drawable/ic_date"
+                android:focusable="true"
+                android:gravity="left|center"
+                android:text="@string/sample_date" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/checkout_layout_total"
+            style="@style/InfoView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkout_layout_date"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/total_items"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/checkout_total_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sample_qty" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/checkout_item_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkout_layout_total"
+            android:text="@string/list_of_items"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/checkout_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/checkout_confirm_btn"
+            android:layout_below="@+id/checkout_item_list_title" />
+
+        <Button
+            android:id="@+id/checkout_confirm_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+
+            android:text="@string/submit_sales" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -7,7 +7,9 @@ import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface AppService {
@@ -20,6 +22,10 @@ public interface AppService {
 
 
     @GET("pt_android_app.php")
-    List<Grade> listGrades(@Query("action") String action, @Query("godown_id") int godownId);
+    Call<List<Grade>> listGrades(@Query("action") String action, @Query("godown_id") int godownId);
+
+    @POST("pt_android_app.php")
+    Call<String> submitSalesOrder(@Query("action") String action,@Body String data);
+
 
 }

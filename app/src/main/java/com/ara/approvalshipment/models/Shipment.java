@@ -22,6 +22,8 @@ public class Shipment {
     private double rate;
     @SerializedName("despatch_total_amount")
     private double total;
+    @SerializedName("despatch_grade_id")
+    private int gradeId;
     @SerializedName("grade_name")
     private String gradeName;
     @SerializedName("station_name")
@@ -38,6 +40,15 @@ public class Shipment {
     private String arrivedDate;
     private double companyDiversionQty;
     private double ownDiversionQty;
+
+
+    public int getGradeId() {
+        return gradeId;
+    }
+
+    public void setGradeId(int gradeId) {
+        this.gradeId = gradeId;
+    }
 
     public static Shipment fromJson(String json) {
         Gson gson = new GsonBuilder().create();
