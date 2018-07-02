@@ -9,9 +9,11 @@ import android.view.View;
 
 import com.ara.approvalshipment.BuildConfig;
 import com.ara.approvalshipment.R;
+import com.ara.approvalshipment.models.Grade;
 import com.ara.approvalshipment.models.User;
 
 import java.util.Calendar;
+import java.util.List;
 
 import okhttp3.MediaType;
 import retrofit2.Retrofit;
@@ -20,28 +22,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Helper {
     public static final String REST_URL = "http://prasaadtransports.com/app/";
     public static final MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
-
-    public static String getSubmitShipmentURL() {
-        return REST_URL + "pt_android_app.php?action=arrived";
-    }
-
     public static final int LOGIN_REQUEST = 101;
     public static final int ARRIVAL_REQUEST = 102;
     public static final int DATE_PICKER_REQUEST = 103;
-
-    public static String PREFERENCE_NAME = "PTSA_PREFERENCE";
-    public static String USER_INFO = "user_infO";
+    public static final int SEARCH_GRADE_REQUEST = 104;
     public static final String LOGIN_ACTION = "login";
     public static final String DISPATCH_ACTION = "despatch";
+    public static final String GRADE_LIST_ACTION = "grade";
     public static final String SUBMIT_ACTION = "submit";
     public static final String SHIPMENT_EXTRA = "ShipmentJson";
     public static final String POSITION_EXTRA = "position";
     public static final String DATE_EXTRA = "Date";
-
     public static final String SHIPMENT_DATA = "data";
+    public static String PREFERENCE_NAME = "PTSA_PREFERENCE";
+    public static String USER_INFO = "user_infO";
+
+
+    private static List<Grade> availableGrades;
     public static User CurrentUser;
-
-
     private static Retrofit retrofit;
     private static AppService appService;
 
@@ -52,11 +50,22 @@ public class Helper {
                 .build();
     }
 
+    public static String getSubmitShipmentURL() {
+        return REST_URL + "pt_android_app.php?action=arrived";
+    }
+
     public static AppService getAppService() {
         if (appService == null) {
             appService = retrofit.create(AppService.class);
         }
         return appService;
+    }
+
+    public static List<Grade> getAvailableGrades(boolean force) {
+        if (availableGrades == null || force) {
+            availableGrades = getAppService().listGrades(GRADE_LIST_ACTION, CurrentUser.getGodownId());
+        }
+        return availableGrades;
     }
 
     public static void showSnackbar(View view, int messageId) {

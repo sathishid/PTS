@@ -14,6 +14,27 @@ public class User {
     private String password;
     private int godownId;
 
+    public static User fromGson(String message) {
+        Gson gson = new GsonBuilder().create();
+        return gson.fromJson(message, User.class);
+    }
+
+    public static User fromJson(String message) {
+        try {
+            JSONArray jsonArray = new JSONArray(message);
+            User user = new User();
+            JSONObject reader = jsonArray.getJSONObject(0);
+
+            user.userId = Integer.parseInt(reader.getString("userid"));
+            user.userName = reader.getString("username");
+            user.godownId = reader.getInt("godown_id");
+
+            return user;
+        } catch (JSONException jsonException) {
+            return null;
+        }
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -52,27 +73,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public static User fromGson(String message) {
-        Gson gson = new GsonBuilder().create();
-        return gson.fromJson(message, User.class);
-    }
-
-    public static User fromJson(String message) {
-        try {
-            JSONArray jsonArray = new JSONArray(message);
-            User user = new User();
-            JSONObject reader = jsonArray.getJSONObject(0);
-
-            user.userId = Integer.parseInt(reader.getString("userid"));
-            user.userName = reader.getString("username");
-            user.godownId = reader.getInt("godown_id");
-
-            return user;
-        } catch (JSONException jsonException) {
-            return null;
-        }
     }
 
     public String toJson() {

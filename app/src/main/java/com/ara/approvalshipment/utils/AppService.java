@@ -1,5 +1,6 @@
 package com.ara.approvalshipment.utils;
 
+import com.ara.approvalshipment.models.Grade;
 import com.ara.approvalshipment.models.Shipment;
 
 import java.util.List;
@@ -19,6 +20,6 @@ public interface AppService {
 
 
     @GET("pt_android_app.php")
-    Call<String> submitShipment(@Query("action") String action, @Query("data") String shipmentAsJson);
+    List<Grade> listGrades(@Query("action") String action, @Query("godown_id") int godownId);
 
 }

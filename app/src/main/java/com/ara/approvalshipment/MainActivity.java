@@ -27,6 +27,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,21 +38,22 @@ import static com.ara.approvalshipment.utils.Helper.DISPATCH_ACTION;
 import static com.ara.approvalshipment.utils.Helper.LOGIN_REQUEST;
 import static com.ara.approvalshipment.utils.Helper.POSITION_EXTRA;
 import static com.ara.approvalshipment.utils.Helper.PREFERENCE_NAME;
+import static com.ara.approvalshipment.utils.Helper.SEARCH_GRADE_REQUEST;
 import static com.ara.approvalshipment.utils.Helper.SHIPMENT_EXTRA;
 import static com.ara.approvalshipment.utils.Helper.USER_INFO;
 import static com.ara.approvalshipment.utils.Helper.getAppService;
+import static com.ara.approvalshipment.utils.Helper.getAvailableGrades;
 import static com.ara.approvalshipment.utils.Helper.log;
 import static com.ara.approvalshipment.utils.Helper.showSnackbar;
 
 public class MainActivity extends AppCompatActivity implements ListViewClickListener {
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     @BindView(R.id.shipment_progress)
     ProgressBar progressBar;
     @BindView(R.id.ships_recyclerView)
     RecyclerView recyclerView;
     List<Shipment> shipmentList;
-
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
             CurrentUser = User.fromGson(sharedPreferences.getString(USER_INFO, null));
             loadShipments();
             updateLabel();
+            getAvailableGrades(true);
 
         } else {
             Intent intent = new Intent(this, LoginActivity.class);
@@ -122,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
                 loadShipments();
                 updateSharedPreference();
                 updateLabel();
+                getAvailableGrades(true);
                 break;
             case ARRIVAL_REQUEST:
                 int position = data.getIntExtra(POSITION_EXTRA, -1);
@@ -134,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
                     mAdapter.notifyItemRemoved(position);
                 }
                 showSnackbar(recyclerView, R.string.shipment_submitted);
+                getAvailableGrades(true);
                 break;
         }
     }
@@ -211,6 +216,12 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putString(USER_INFO, CurrentUser.toJson());
         edit.commit();
+    }
+
+    @OnClick(R.id.add_sales_order)
+    public void addSalesOrder(View view) {
+        Intent intent=new Intent(this,SearchActivity.class);
+        startActivityForResult(intent,SEARCH_GRADE_REQUEST);
     }
 
 }

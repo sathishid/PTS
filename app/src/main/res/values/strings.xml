@@ -57,4 +57,7 @@
     <string name="company">Company Diversion Quantity</string>
     <string name="own">Own Diversion Quantity</string>
     <string name="good_qty_neg">Good quantity cannot be negative.</string>
+    <string name="search_grade_name">Search Grade Name</string>
+    <string name="search_hint">Type grade name…</string>
+    <string name="toolbar_title">Grades</string>
 </resources>

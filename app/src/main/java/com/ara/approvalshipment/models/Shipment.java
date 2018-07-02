@@ -39,6 +39,11 @@ public class Shipment {
     private double companyDiversionQty;
     private double ownDiversionQty;
 
+    public static Shipment fromJson(String json) {
+        Gson gson = new GsonBuilder().create();
+        return gson.fromJson(json, Shipment.class);
+    }
+
     public double getCompanyDiversionQty() {
         return companyDiversionQty;
     }
@@ -205,11 +210,6 @@ public class Shipment {
 
     public void setGoodQty(double goodQty) {
         this.goodQty = goodQty;
-    }
-
-    public static Shipment fromJson(String json) {
-        Gson gson = new GsonBuilder().create();
-        return gson.fromJson(json, Shipment.class);
     }
 
     public String toJson() {

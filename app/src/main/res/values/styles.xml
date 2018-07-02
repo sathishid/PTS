@@ -9,11 +9,32 @@
         <item name="android:fontFamily">@font/app_font</item>
 
     </style>
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/app_font</item>
+
+    </style>
+
     <style name="InfoView" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:background">@color/lightGray</item>
         <item name="android:layout_marginTop">@dimen/list_item_padding</item>
         <item name="android:padding">@dimen/list_item_padding</item>
 
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+        <item name="android:textColorSecondary">@color/gray</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>
