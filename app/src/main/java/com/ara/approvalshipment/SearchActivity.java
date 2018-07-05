@@ -147,8 +147,10 @@ public class SearchActivity extends AppCompatActivity implements ListViewClickLi
             return;
         if (requestCode == CHECKOUT_REQUEST) {
             salesOrder = new SalesOrder();
-
+            searchView.setQuery("", false);
+            searchView.setIconified(false);
             mSalesOrderCountView.setText("0");
+
         }
     }
 }

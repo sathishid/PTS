@@ -66,4 +66,10 @@
     <string name="submit_sales">Confirm</string>
     <string name="list_of_items">List of Items</string>
     <string name="selling_quantity">Selling Quantity</string>
+    <string name="damaged">Damaged,</string>
+    <string name="clotted">Clotted</string>
+    <string name="from_date">From Date (Tap to Edit)</string>
+    <string name="to_date">To Date (Tap to Edit)</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="stock_report">Stock Report</string>
 </resources>

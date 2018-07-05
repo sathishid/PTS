@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ara.approvalshipment.R;
@@ -56,6 +57,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         public final TextView mSalesQty;
 
 
+
         public OrderItem mItem;
 
         public ViewHolder(View view) {
@@ -63,6 +65,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
             mView = view;
             mGradeName = (TextView) view.findViewById(R.id.sales_item_grade);
             mSalesQty = (TextView) view.findViewById(R.id.sales_item_qty);
+
         }
 
         @Override

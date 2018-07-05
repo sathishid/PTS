@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ara.approvalshipment.R;
@@ -47,10 +48,10 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.ViewHolder> 
         holder.mItem = grade;
         holder.mGradeName.setText(grade.getGradeName());
         holder.mAvailableQty.setText(formatDouble(grade.getQuantity()));
-        holder.mSalesQty.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        holder.mAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                double soldQty = toDouble(v.getText().toString());
+            public void onClick(View v) {
+                double soldQty = toDouble(holder.mSalesQty.getText().toString());
                 double availQty = grade.getQuantity();
                 double remainQty = availQty - soldQty;
                 grade.setQuantity(remainQty);
@@ -60,9 +61,9 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.ViewHolder> 
                     listViewClickListener.onItemClick(gradeListFiltered.get(position), position);
                 else
                     listViewClickListener.onItemClick(mValues.get(position), position);
-                return false;
             }
         });
+
     }
 
     @Override
@@ -110,6 +111,7 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.ViewHolder> 
         public final TextView mGradeName;
         public final TextView mAvailableQty;
         public final TextInputEditText mSalesQty;
+        public final ImageButton mAddToCart;
 
 
         public Grade mItem;
@@ -120,7 +122,7 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.ViewHolder> 
             mGradeName = (TextView) view.findViewById(R.id.list_grade_name);
             mAvailableQty = (TextView) view.findViewById(R.id.list_grade_avail_qty);
             mSalesQty = (TextInputEditText) view.findViewById(R.id.list_grade_sold_qty);
-
+            mAddToCart = (ImageButton) view.findViewById(R.id.list_grade_add_to_cart);
         }
 
         @Override

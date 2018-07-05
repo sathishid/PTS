@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.Design.CoordinatorLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,14 +28,39 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/add_sales_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:scaleType="center"
-        android:src="@drawable/ic_sales_order"
-        app:fabSize="normal" />
-</RelativeLayout>
+    <android.support.design.widget.CoordinatorLayout
+        style="@style/Widget.Design.CoordinatorLayout"
+        android:id="@+id/sales_layout_fab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/stock_report_fab"
+            android:layout_width="@dimen/standard_45"
+            android:layout_height="@dimen/standard_45"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/standard_21"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_stock" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_sales_order"
+            android:layout_width="@dimen/standard_45"
+            android:layout_height="@dimen/standard_45"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/standard_21"
+            android:scaleType="center"
+            android:src="@drawable/ic_sales_order" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/sales_order_option"
+            android:layout_width="@dimen/standard_45"
+            android:layout_height="@dimen/standard_45"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/standard_21"
+            android:scaleType="center"
+            android:src="@drawable/ic_add_no_background"
+            app:fabSize="normal" />
+    </android.support.design.widget.CoordinatorLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -67,6 +67,12 @@ public class LoginActivity extends AppCompatActivity {
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     @OnClick(R.id.email_sign_in_button)
     public void onSignIn(View view) {
         attemptLogin();

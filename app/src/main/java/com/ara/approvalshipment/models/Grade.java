@@ -13,6 +13,8 @@ public class Grade {
     private double quantity;
     private double soldQuantity;
 
+
+
     public String getGradeCode() {
         return gradeCode;
     }

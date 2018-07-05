@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ProgressBar;
 
 import com.ara.approvalshipment.adapters.ShipmentItemAdapter;
@@ -52,8 +56,23 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
     @BindView(R.id.ships_recyclerView)
     RecyclerView recyclerView;
     List<Shipment> shipmentList;
+
+    @BindView(R.id.sales_layout_fab)
+    CoordinatorLayout coordinatorLayout;
+
+    @BindView(R.id.add_sales_order)
+    FloatingActionButton mSalesOrderFAB;
+
+    @BindView(R.id.sales_order_option)
+    FloatingActionButton mSalesOrderOptionFAB;
+
+    @BindView(R.id.stock_report_fab)
+    FloatingActionButton mSalesReportFAB;
+
+
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private boolean isFABOpen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +101,21 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
             startActivityForResult(intent, LOGIN_REQUEST);
         }
 
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && coordinatorLayout.getVisibility() == View.VISIBLE) {
+                    coordinatorLayout.setVisibility(View.GONE);
+                } else if (dy < 0 && coordinatorLayout.getVisibility() != View.VISIBLE) {
+                    coordinatorLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
     }
+
+
 
     private void updateLabel() {
         ActionBar actionBar = getSupportActionBar();
@@ -220,8 +252,51 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
 
     @OnClick(R.id.add_sales_order)
     public void addSalesOrder(View view) {
-        Intent intent=new Intent(this,SearchActivity.class);
-        startActivityForResult(intent,SEARCH_GRADE_REQUEST);
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivityForResult(intent, SEARCH_GRADE_REQUEST);
+    }
+
+    @OnClick(R.id.stock_report_fab)
+    public void showStock(View view) {
+        Intent intent = new Intent(this, StockReportActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.sales_order_option)
+    public void showOptions(View view) {
+
+        if (!isFABOpen) {
+            showFABMenu();
+        } else {
+            closeFABMenu();
+        }
+    }
+
+    private void showFABMenu() {
+        isFABOpen = true;
+        final OvershootInterpolator interpolator = new OvershootInterpolator();
+        ViewCompat.animate(mSalesOrderOptionFAB).
+                rotation(135f).
+                withLayer().
+                setDuration(500).
+                setInterpolator(interpolator).
+                start();
+        mSalesOrderFAB.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
+        mSalesReportFAB.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
+
+    }
+
+    private void closeFABMenu() {
+        isFABOpen = false;
+        final OvershootInterpolator interpolator = new OvershootInterpolator();
+        ViewCompat.animate(mSalesOrderOptionFAB).
+                rotation(0).
+                withLayer().
+                setDuration(500).
+                setInterpolator(interpolator).
+                start();
+        mSalesOrderFAB.animate().translationY(0);
+        mSalesReportFAB.animate().translationY(0);
     }
 
 }

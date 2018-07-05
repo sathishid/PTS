@@ -42,7 +42,10 @@
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
-        <activity android:name=".CheckoutActivity"></activity>
+        <activity android:name=".CheckoutActivity" />
+        <activity
+            android:name=".StockReportActivity"
+            android:label="@string/stock_report"></activity>
     </application>
 
 </manifest>

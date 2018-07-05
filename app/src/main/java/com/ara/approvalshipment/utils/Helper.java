@@ -29,18 +29,24 @@ public class Helper {
     public static final int LOGIN_REQUEST = 101;
     public static final int ARRIVAL_REQUEST = 102;
     public static final int DATE_PICKER_REQUEST = 103;
+
     public static final int SEARCH_GRADE_REQUEST = 104;
     public static final int CHECKOUT_REQUEST = 105;
+    public static final int DATE_PICKER_FROM_REQUEST = 106;
+    public static final int DATE_PICKER_TO_REQUEST = 107;
+    public static final int STOCK_REPORT_EQUEST = 108;
+
 
     public static final String LOGIN_ACTION = "login";
     public static final String DISPATCH_ACTION = "despatch";
+    public static final String STOCK_REPORT_ACTION = "report";
     public static final String GRADE_LIST_ACTION = "grade";
     public static final String SUBMIT_SALES_ACTION = "submit_sales";
     public static final String SHIPMENT_EXTRA = "ShipmentJson";
     public static final String POSITION_EXTRA = "position";
     public static final String DATE_EXTRA = "Date";
-    public static final String SUCCESS="Success";
-    public static final String FAILED="Failed";
+    public static final String SUCCESS = "Success";
+    public static final String FAILED = "Failed";
     public static final String DATA_PARAM = "data";
     public static String PREFERENCE_NAME = "PTSA_PREFERENCE";
     public static String USER_INFO = "user_infO";
@@ -62,6 +68,7 @@ public class Helper {
     public static String getSubmitShipmentURL() {
         return REST_URL + "pt_android_app.php?action=arrived";
     }
+
     public static String getSubmitSalesURL() {
         return REST_URL + "pt_android_app.php?action=submit_sales";
     }
@@ -125,6 +132,10 @@ public class Helper {
 
     public static String formatDouble(double price) {
         return String.format("%8.2f", price).trim();
+    }
+
+    public static String toQuantity(double qty) {
+        return String.format("%8.0f", qty).trim();
     }
 
     public static double toDouble(String doubleValue) {

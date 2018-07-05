@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/list_item_padding"
+    tools:context=".StockReportActivity">
+
+    <ProgressBar
+        android:id="@+id/stock_report_pg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/stock_report_date_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            style="@style/InfoView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/from_date"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/stock_report_from_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawableEnd="@drawable/ic_date"
+                android:drawableRight="@drawable/ic_date"
+                android:focusable="true"
+                android:gravity="left|center"
+                android:text="@string/sample_date" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/InfoView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/to_date"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/stock_report_to_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawableEnd="@drawable/ic_date"
+                android:drawableRight="@drawable/ic_date"
+                android:focusable="true"
+                android:gravity="left|center"
+                android:text="@string/sample_date" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/stock_report_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/stock_report_date_layout">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
