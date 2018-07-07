@@ -2,7 +2,6 @@ package com.ara.approvalshipment.adapters;
 
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +60,7 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.ViewHolder> 
                     listViewClickListener.onItemClick(gradeListFiltered.get(position), position);
                 else
                     listViewClickListener.onItemClick(mValues.get(position), position);
+                holder.mSalesQty.setText("0");
             }
         });
 

@@ -72,4 +72,8 @@
     <string name="to_date">To Date (Tap to Edit)</string>
     <string name="no_data_found">No Data Found</string>
     <string name="stock_report">Stock Report</string>
+    <string name="opening_quanity">Opening Quanity</string>
+    <string name="purchased_qty">Purchased Qty</string>
+    <string name="sold_quantity">Sales Quantity</string>
+    <string name="in_stock">Closing Stock</string>
 </resources>

@@ -12,6 +12,9 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ara.approvalshipment.adapters.GradeAdapter;
@@ -46,6 +49,9 @@ public class SearchActivity extends AppCompatActivity implements ListViewClickLi
 
     @BindView(R.id.search_sales_order_fab)
     FloatingActionButton mSalesOrderCounterFAB;
+
+    @BindView(R.id.sales_item_counter_layout)
+    FrameLayout mFABContainer;
 
 
     private GradeAdapter mAdapter;
@@ -82,11 +88,9 @@ public class SearchActivity extends AppCompatActivity implements ListViewClickLi
     }
 
     private void animateFloatingButton() {
-//        Animation anim = android.view.animation.AnimationUtils.loadAnimation(mSalesOrderCounterFAB.getContext(), R.anim.shake);
-//        anim.setDuration(200L);
-//        mSalesOrderCounterFAB.startAnimation(anim);
 
-
+        final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        mFABContainer.startAnimation(animShake);
     }
 
     @Override

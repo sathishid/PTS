@@ -44,9 +44,12 @@ public class StockReportAdapter extends RecyclerView.Adapter<StockReportAdapter.
         final Stock stockItem = listFiltered.get(position);
         holder.mItem = stockItem;
         holder.mGradeName.setText(stockItem.getGradeName());
-        holder.mStockQty.setText(toQuantity(stockItem.getStockQuantity()));
+        holder.mInStockQty.setText(toQuantity(stockItem.getOpeningQty()));
         holder.mClottedQty.setText(toQuantity(stockItem.getClottedQty()));
         holder.mDamagedQty.setText(toQuantity(stockItem.getDamagedQty()));
+        holder.mOpeningQty.setText(toQuantity(stockItem.getOpeningQty()));
+        holder.mPurchaseQty.setText(toQuantity(stockItem.getPurchaseQty()));
+        holder.mSoldQty.setText(toQuantity(stockItem.getOpeningQty()));
     }
 
     @Override
@@ -96,7 +99,10 @@ public class StockReportAdapter extends RecyclerView.Adapter<StockReportAdapter.
         public final TextView mGradeName;
         public final TextView mDamagedQty;
         public final TextView mClottedQty;
-        public final TextView mStockQty;
+        public final TextView mPurchaseQty;
+        public final TextView mOpeningQty;
+        public final TextView mSoldQty;
+        public final TextView mInStockQty;
 
 
         public Stock mItem;
@@ -105,10 +111,12 @@ public class StockReportAdapter extends RecyclerView.Adapter<StockReportAdapter.
             super(view);
             mView = view;
             mGradeName = (TextView) view.findViewById(R.id.stock_report_grade_name);
-            mStockQty = (TextView) view.findViewById(R.id.stock_report_stock_qty);
+            mInStockQty = (TextView) view.findViewById(R.id.stock_report_stock_qty);
             mDamagedQty = (TextView) view.findViewById(R.id.stock_report_damaged_qty);
             mClottedQty = (TextView) view.findViewById(R.id.stock_report_clotted_qty);
-
+            mPurchaseQty = (TextView) view.findViewById(R.id.stock_report_purchased_qty);
+            mOpeningQty = (TextView) view.findViewById(R.id.stock_report_opening_qty);
+            mSoldQty = (TextView) view.findViewById(R.id.stock_report_sold_qty);
         }
 
         @Override

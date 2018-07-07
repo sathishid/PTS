@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/list_item_background"
+    android:orientation="vertical"
     android:padding="@dimen/list_item_padding">
 
     <TextView
@@ -14,49 +15,148 @@
         android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        style="@style/InfoView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/stock_report_grade_name">
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/opening_quanity"
+             />
+
+
+        <TextView
+            android:id="@+id/stock_report_opening_qty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+
+            android:gravity="right"
+            android:text="@string/sample_qty" />
+    </LinearLayout>
+    <LinearLayout
+        style="@style/InfoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/purchased_qty"
+             />
+
+
+        <TextView
+            android:id="@+id/stock_report_purchased_qty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+
+            android:gravity="right"
+            android:text="@string/sample_qty" />
+    </LinearLayout>
+    <LinearLayout
+        style="@style/InfoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/damaged_quantity"
+             />
 
         <TextView
             android:id="@+id/stock_report_damaged_qty"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="right"
             android:layout_marginLeft="@dimen/list_item_margin"
             android:layout_marginStart="@dimen/list_item_margin"
             android:text="@string/sample_qty" />
 
+    </LinearLayout>
+    <LinearLayout
+        style="@style/InfoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/list_item_margin"
-            android:layout_marginStart="@dimen/list_item_margin"
-            android:text="@string/damaged" />
+            android:layout_weight="1"
+            android:text="@string/clotted_quantity"
+             />
 
         <TextView
             android:id="@+id/stock_report_clotted_qty"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="right"
             android:layout_marginLeft="@dimen/list_item_margin"
             android:layout_marginStart="@dimen/list_item_margin"
             android:text="@string/sample_qty" />
 
+    </LinearLayout>
+    <LinearLayout
+        style="@style/InfoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sold_quantity"
+             />
+
+        <TextView
+            android:id="@+id/stock_report_sold_qty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="right"
             android:layout_marginLeft="@dimen/list_item_margin"
             android:layout_marginStart="@dimen/list_item_margin"
-            android:text="@string/clotted" />
+            android:text="@string/sample_qty" />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/stock_report_stock_qty"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        style="@style/InfoView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sample_qty"
-        android:textStyle="bold"
-        app:layout_constraintRight_toRightOf="@id/stock_report_grade_name" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/in_stock"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/stock_report_stock_qty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="right"
+            android:text="@string/sample_qty"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="@id/stock_report_grade_name" />
+
+    </LinearLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

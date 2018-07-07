@@ -89,7 +89,7 @@ public class StockReportActivity extends AppCompatActivity {
             case DATE_PICKER_TO_REQUEST:
                 toDate.setText(data.getStringExtra(DATE_EXTRA));
                 String strFromDate = fromDate.getText().toString().replace('/', '-');
-                String strToDate = fromDate.getText().toString().replace('/', '-');
+                String strToDate = toDate.getText().toString().replace('/', '-');
 
                 Call<List<Stock>> stocks = getAppService().listStocks(STOCK_REPORT_ACTION,
                         strFromDate, strToDate, CurrentUser.getGodownId());
