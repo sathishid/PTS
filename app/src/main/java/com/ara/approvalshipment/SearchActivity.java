@@ -96,15 +96,19 @@ public class SearchActivity extends AppCompatActivity implements ListViewClickLi
     @Override
     public void onItemClick(Object selectedObject, int position) {
         Grade grade = (Grade) selectedObject;
-        OrderItem orderItem = new OrderItem();
-        orderItem.setGradeId(grade.getGradeId());
-        orderItem.setGradeCode(grade.getGradeCode());
-        orderItem.setGradeName(grade.getGradeName());
-        orderItem.setSoldQty(grade.getSoldQuantity());
-        salesOrder.addOrderItem(orderItem);
-        salesOrder.setDate(dateToString(Calendar.getInstance()));
-        mSalesOrderCountView.setText(salesOrder.getOrderItems().size() + "");
-        animateFloatingButton();
+        double soldQty = grade.getSoldQuantity();
+        if (soldQty > 0) {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setGradeId(grade.getGradeId());
+            orderItem.setGradeCode(grade.getGradeCode());
+            orderItem.setGradeName(grade.getGradeName());
+            orderItem.setSoldQty(soldQty);
+            salesOrder.setTotalQuantity(salesOrder.getTotalQuantity() + soldQty);
+            salesOrder.addOrderItem(orderItem);
+            salesOrder.setDate(dateToString(Calendar.getInstance()));
+            mSalesOrderCountView.setText(salesOrder.getOrderItems().size() + "");
+            animateFloatingButton();
+        }
     }
 
     @OnClick(R.id.search_sales_order_fab)

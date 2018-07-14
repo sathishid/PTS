@@ -4,22 +4,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.ara.approvalshipment.R;
 import com.ara.approvalshipment.models.Shipment;
+import com.ara.approvalshipment.models.Stock;
 import com.ara.approvalshipment.utils.ListViewClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ShipmentItemAdapter extends RecyclerView.Adapter<ShipmentItemAdapter.ViewHolder> {
+public class ShipmentItemAdapter extends RecyclerView.Adapter<ShipmentItemAdapter.ViewHolder>
+        {
 
     private final List<Shipment> mValues;
+    private List<Shipment> listFiltered;
     private final ListViewClickListener onItemClickListner;
 
 
     public ShipmentItemAdapter(List<Shipment> items, ListViewClickListener onItemClickListener) {
         mValues = items;
+        listFiltered = items;
         this.onItemClickListner = onItemClickListener;
     }
 
@@ -33,7 +40,7 @@ public class ShipmentItemAdapter extends RecyclerView.Adapter<ShipmentItemAdapte
     @Override
     public void onBindViewHolder(final ShipmentItemAdapter.ViewHolder holder, final int position) {
 
-        final Shipment shipment = mValues.get(position);
+        final Shipment shipment = listFiltered.get(position);
         holder.mItem = shipment;
         holder.mProductName.setText(shipment.getGradeName());
         holder.mDispatchNo.setText(shipment.getDcNo());
@@ -51,8 +58,10 @@ public class ShipmentItemAdapter extends RecyclerView.Adapter<ShipmentItemAdapte
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return listFiltered.size();
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;

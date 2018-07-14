@@ -37,6 +37,7 @@ import static com.ara.approvalshipment.utils.Helper.SUCCESS;
 import static com.ara.approvalshipment.utils.Helper.getSubmitSalesURL;
 import static com.ara.approvalshipment.utils.Helper.log;
 import static com.ara.approvalshipment.utils.Helper.showSnackbar;
+import static com.ara.approvalshipment.utils.Helper.toQuantity;
 
 public class CheckoutActivity extends AppCompatActivity implements ListViewClickListener {
     SalesOrder salesOrder;
@@ -71,6 +72,7 @@ public class CheckoutActivity extends AppCompatActivity implements ListViewClick
         String json = intent.getStringExtra(SALES_ORDER_EXTRA);
         ;
         salesOrder = SalesOrder.fromJson(json);
+        mTotalItemsView.setText(toQuantity(salesOrder.getTotalQuantity()));
 
         recyclerView.setHasFixedSize(true);
 

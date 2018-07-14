@@ -156,7 +156,7 @@ public class ShipmentArrivalActivity extends AppCompatActivity {
         shipment.setOwnDiversionQty(toDouble(ownQty));
         shipment.setCompanyDiversionQty(toDouble(companyQty));
 
-        double totalDamaged = shipment.getClottedQty() + shipment.getDamagedQty() +
+        double totalDamaged = (shipment.getClottedQty()/20) + (shipment.getDamagedQty()/20) +
                 shipment.getOwnDiversionQty() + shipment.getCompanyDiversionQty();
         double goodQty = shipment.getQuantity() - totalDamaged;
         shipment.setGoodQty(goodQty);

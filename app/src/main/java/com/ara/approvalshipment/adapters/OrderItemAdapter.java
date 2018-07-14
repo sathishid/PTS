@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ara.approvalshipment.R;
@@ -13,7 +12,7 @@ import com.ara.approvalshipment.utils.ListViewClickListener;
 
 import java.util.List;
 
-import static com.ara.approvalshipment.utils.Helper.formatDouble;
+import static com.ara.approvalshipment.utils.Helper.toQuantity;
 
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.ViewHolder> {
 
@@ -41,7 +40,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         final OrderItem orderItem = mValues.get(position);
         holder.mItem = orderItem;
         holder.mGradeName.setText(orderItem.getGradeName());
-        holder.mSalesQty.setText(formatDouble(orderItem.getSoldQty()));
+        holder.mSalesQty.setText(toQuantity(orderItem.getSoldQty()));
     }
 
     @Override
@@ -55,7 +54,6 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         public final TextView mGradeName;
 
         public final TextView mSalesQty;
-
 
 
         public OrderItem mItem;

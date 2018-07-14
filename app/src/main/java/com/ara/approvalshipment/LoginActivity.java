@@ -58,18 +58,11 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnEditorAction(R.id.password)
-    public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-        if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-            attemptLogin();
-            return true;
-        }
-        return false;
-    }
+
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        setResult(RESULT_CANCELED);
         finish();
     }
 
@@ -104,8 +97,6 @@ public class LoginActivity extends AppCompatActivity {
                     showSnackbar(mLoginFormView, R.string.something_went_wrong);
                     log("On Login", exception.getMessage());
                 }
-
-
             }
 
             @Override

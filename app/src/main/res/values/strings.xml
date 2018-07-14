@@ -38,11 +38,11 @@
     <string name="sample_qty">35.000</string>
     <string name="sample_rate">1554.00</string>
     <string name="sample_total">31000.55</string>
-    <string name="clotted_quantity">Clotted Quantity</string>
+    <string name="clotted_quantity">Clotted Quantity (In Bags)</string>
     <string name="clotted_details">Clotted Details</string>
     <string name="reason">Reason</string>
     <string name="damaged_details">Damaged Details</string>
-    <string name="damaged_quantity">Damaged Quantity</string>
+    <string name="damaged_quantity">Damaged Quantity (In Bags)</string>
     <string name="damaged_reason">Damaged Reason</string>
     <string name="clotted_reason">Clotted Reason</string>
     <string name="arrived">Arrived</string>
@@ -72,8 +72,11 @@
     <string name="to_date">To Date (Tap to Edit)</string>
     <string name="no_data_found">No Data Found</string>
     <string name="stock_report">Stock Report</string>
-    <string name="opening_quanity">Opening Quanity</string>
+    <string name="opening_quantity">Opening Quantity</string>
     <string name="purchased_qty">Purchased Qty</string>
     <string name="sold_quantity">Sales Quantity</string>
     <string name="in_stock">Closing Stock</string>
+    <string name="dispatched_vehicle">Vehicle Count</string>
+    <string name="dispatched_quantity">Quantity</string>
+    <string name="transit">Transit</string>
 </resources>

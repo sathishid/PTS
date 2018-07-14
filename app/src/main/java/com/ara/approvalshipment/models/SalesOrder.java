@@ -11,6 +11,15 @@ public class SalesOrder {
     private String date;
     private List<OrderItem> orderItems;
     private User user;
+    private double totalQuantity;
+
+    public double getTotalQuantity() {
+        return totalQuantity;
+    }
+
+    public void setTotalQuantity(double totalPrice) {
+        this.totalQuantity = totalPrice;
+    }
 
     public int getId() {
         return id;

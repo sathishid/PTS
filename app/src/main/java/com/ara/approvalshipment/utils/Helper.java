@@ -40,9 +40,11 @@ public class Helper {
     public static final String LOGIN_ACTION = "login";
     public static final String DISPATCH_ACTION = "despatch";
     public static final String STOCK_REPORT_ACTION = "report";
+    public static final String SHIPMENT_DETAIL_ACTION="shipment";
     public static final String GRADE_LIST_ACTION = "grade";
     public static final String SUBMIT_SALES_ACTION = "submit_sales";
     public static final String SHIPMENT_EXTRA = "ShipmentJson";
+
     public static final String POSITION_EXTRA = "position";
     public static final String DATE_EXTRA = "Date";
     public static final String SUCCESS = "Success";
@@ -135,7 +137,7 @@ public class Helper {
     }
 
     public static String toQuantity(double qty) {
-        return String.format("%8.0f", qty).trim();
+        return String.format("%8.3f", qty).trim();
     }
 
     public static double toDouble(String doubleValue) {

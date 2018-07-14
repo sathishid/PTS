@@ -3,6 +3,8 @@ package com.ara.approvalshipment;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -14,15 +16,19 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.ara.approvalshipment.adapters.ShipmentItemAdapter;
 import com.ara.approvalshipment.models.Shipment;
+import com.ara.approvalshipment.models.ShipmentDetail;
 import com.ara.approvalshipment.models.User;
 import com.ara.approvalshipment.utils.AppService;
 import com.ara.approvalshipment.utils.ListViewClickListener;
@@ -43,6 +49,7 @@ import static com.ara.approvalshipment.utils.Helper.LOGIN_REQUEST;
 import static com.ara.approvalshipment.utils.Helper.POSITION_EXTRA;
 import static com.ara.approvalshipment.utils.Helper.PREFERENCE_NAME;
 import static com.ara.approvalshipment.utils.Helper.SEARCH_GRADE_REQUEST;
+import static com.ara.approvalshipment.utils.Helper.SHIPMENT_DETAIL_ACTION;
 import static com.ara.approvalshipment.utils.Helper.SHIPMENT_EXTRA;
 import static com.ara.approvalshipment.utils.Helper.USER_INFO;
 import static com.ara.approvalshipment.utils.Helper.getAppService;
@@ -60,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
     @BindView(R.id.sales_layout_fab)
     CoordinatorLayout coordinatorLayout;
 
+    @BindView(R.id.ships_detail_layout)
+    LinearLayout detailLayout;
+
     @BindView(R.id.add_sales_order)
     FloatingActionButton mSalesOrderFAB;
 
@@ -68,6 +78,15 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
 
     @BindView(R.id.stock_report_fab)
     FloatingActionButton mSalesReportFAB;
+
+    @BindView(R.id.ships_total_qty)
+    TextView totalShipmentQty;
+
+    @BindView(R.id.ships_vehicle_total)
+    TextView totalShippedVehicle;
+
+    @BindView(R.id.stock_searchView)
+    SearchView searchView;
 
 
     private RecyclerView.Adapter mAdapter;
@@ -92,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
         SharedPreferences sharedPreferences = getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE);
         if (sharedPreferences.contains(USER_INFO)) {
             CurrentUser = User.fromGson(sharedPreferences.getString(USER_INFO, null));
-            loadShipments();
+            loadShipments(null);
             updateLabel();
             getAvailableGrades(true);
 
@@ -107,14 +126,61 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy > 0 && coordinatorLayout.getVisibility() == View.VISIBLE) {
                     coordinatorLayout.setVisibility(View.GONE);
+
                 } else if (dy < 0 && coordinatorLayout.getVisibility() != View.VISIBLE) {
                     coordinatorLayout.setVisibility(View.VISIBLE);
+
                 }
             }
         });
 
-    }
 
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        // listening to search query text change
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                loadShipments(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+
+                return false;
+            }
+        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                loadShipments(null);
+                return false;
+            }
+        });
+        Call<ShipmentDetail> shipmentDetailCall = getAppService().getShipmentDetail(SHIPMENT_DETAIL_ACTION,
+                CurrentUser.getGodownId());
+        shipmentDetailCall.enqueue(new Callback<ShipmentDetail>() {
+            @Override
+            public void onResponse(Call<ShipmentDetail> call, Response<ShipmentDetail> response) {
+                if (response.isSuccessful()) {
+                    ShipmentDetail shipmentDetail = response.body();
+                    totalShipmentQty.setText(shipmentDetail.getDispatchedCount() + "");
+                    totalShippedVehicle.setText(shipmentDetail.getVehicleCount() + "");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ShipmentDetail> call, Throwable t) {
+
+            }
+        });
+    }
 
 
     private void updateLabel() {
@@ -124,9 +190,13 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
         setTitle(title);
     }
 
-    private void loadShipments() {
+    private void loadShipments(String search) {
         AppService appService = getAppService();
-        Call<List<Shipment>> shipmentsService = appService.listShipments(DISPATCH_ACTION, CurrentUser.getGodownId());
+        Call<List<Shipment>> shipmentsService;
+        if (search == null)
+            shipmentsService = appService.listShipments(DISPATCH_ACTION, CurrentUser.getGodownId());
+        else
+            shipmentsService = appService.listShipments(DISPATCH_ACTION, CurrentUser.getGodownId(), search);
         showProgress(true);
         shipmentsService.enqueue(new Callback<List<Shipment>>() {
             @Override
@@ -154,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
         }
         switch (requestCode) {
             case LOGIN_REQUEST:
-                loadShipments();
+                loadShipments(null);
                 updateSharedPreference();
                 updateLabel();
                 getAvailableGrades(true);
