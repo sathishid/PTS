@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/dispatched_items">
+            android:label="@string/dispatched_items"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

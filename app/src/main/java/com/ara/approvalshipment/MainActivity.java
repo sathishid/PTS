@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
             loadShipments(null);
             updateLabel();
             getAvailableGrades(true);
-
+            loadShipmentDetails();
         } else {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivityForResult(intent, LOGIN_REQUEST);
@@ -163,6 +163,10 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
                 return false;
             }
         });
+
+    }
+
+    private void loadShipmentDetails() {
         Call<ShipmentDetail> shipmentDetailCall = getAppService().getShipmentDetail(SHIPMENT_DETAIL_ACTION,
                 CurrentUser.getGodownId());
         shipmentDetailCall.enqueue(new Callback<ShipmentDetail>() {
@@ -181,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
             }
         });
     }
-
 
     private void updateLabel() {
         ActionBar actionBar = getSupportActionBar();
@@ -225,6 +228,7 @@ public class MainActivity extends AppCompatActivity implements ListViewClickList
         switch (requestCode) {
             case LOGIN_REQUEST:
                 loadShipments(null);
+                loadShipmentDetails();
                 updateSharedPreference();
                 updateLabel();
                 getAvailableGrades(true);

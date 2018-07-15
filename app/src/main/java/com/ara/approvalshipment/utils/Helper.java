@@ -40,7 +40,7 @@ public class Helper {
     public static final String LOGIN_ACTION = "login";
     public static final String DISPATCH_ACTION = "despatch";
     public static final String STOCK_REPORT_ACTION = "report";
-    public static final String SHIPMENT_DETAIL_ACTION="shipment";
+    public static final String SHIPMENT_DETAIL_ACTION = "shipment";
     public static final String GRADE_LIST_ACTION = "grade";
     public static final String SUBMIT_SALES_ACTION = "submit_sales";
     public static final String SHIPMENT_EXTRA = "ShipmentJson";
@@ -127,6 +127,11 @@ public class Helper {
     }
 
     public static void log(String tag, String message) {
+        if (message == null || message.trim().isEmpty()) {
+            Log.e(tag, "Empty Message");
+            return;
+        }
+
         if (BuildConfig.DEBUG) {
             Log.d(tag, message);
         }
