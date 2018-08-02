@@ -10,10 +10,10 @@ public class Stock {
     @SerializedName("grade_code")
     private String gradeCode;
     @SerializedName("open_qty")
-    private int openingQty;
+    private double openingQty;
 
     @SerializedName("purchase_qty")
-    private int purchaseQty;
+    private double purchaseQty;
 
     @SerializedName("clotted_qty")
     private double clottedQty;
@@ -24,11 +24,11 @@ public class Stock {
     @SerializedName("sales_qty")
     private double soldQty;
 
-    public int getPurchaseQty() {
+    public double getPurchaseQty() {
         return purchaseQty;
     }
 
-    public void setPurchaseQty(int purchaseQty) {
+    public void setPurchaseQty(double purchaseQty) {
         this.purchaseQty = purchaseQty;
     }
 
@@ -64,11 +64,11 @@ public class Stock {
         this.damagedQty = damagedQty;
     }
 
-    public int getOpeningQty() {
+    public double getOpeningQty() {
         return openingQty;
     }
 
-    public void setOpeningQty(int openingQty) {
+    public void setOpeningQty(double openingQty) {
         this.openingQty = openingQty;
     }
 
