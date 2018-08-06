@@ -24,6 +24,17 @@ public class Stock {
     @SerializedName("sales_qty")
     private double soldQty;
 
+    @SerializedName("closing_qty")
+    private double closingQty;
+
+    public double getClosingQty() {
+        return closingQty;
+    }
+
+    public void setClosingQty(double closingQty) {
+        this.closingQty = closingQty;
+    }
+
     public double getPurchaseQty() {
         return purchaseQty;
     }

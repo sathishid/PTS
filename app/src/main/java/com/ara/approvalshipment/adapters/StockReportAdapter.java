@@ -44,12 +44,12 @@ public class StockReportAdapter extends RecyclerView.Adapter<StockReportAdapter.
         final Stock stockItem = listFiltered.get(position);
         holder.mItem = stockItem;
         holder.mGradeName.setText(stockItem.getGradeName());
-        holder.mInStockQty.setText(toQuantity(stockItem.getOpeningQty()));
+        holder.mInStockQty.setText(toQuantity(stockItem.getClosingQty()));
         holder.mClottedQty.setText(toQuantity(stockItem.getClottedQty()));
         holder.mDamagedQty.setText(toQuantity(stockItem.getDamagedQty()));
         holder.mOpeningQty.setText(toQuantity(stockItem.getOpeningQty()));
         holder.mPurchaseQty.setText(toQuantity(stockItem.getPurchaseQty()));
-        holder.mSoldQty.setText(toQuantity(stockItem.getOpeningQty()));
+        holder.mSoldQty.setText(toQuantity(stockItem.getSoldQty()));
     }
 
     @Override
